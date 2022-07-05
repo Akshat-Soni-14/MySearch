@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_search.css">
+</head>
+<body>
+<h1>Search Results</h1>
+<% if(titles.length==0) { %>
+<div class="noresults">
+Sorry!! No results found :( <br><br> Did you really mean "<%- query %>"?
+<% } %>
+</div>
+<div id="line_break">
+<ul>
+<% for(let i=0;i<titles.length;i++) { %>
+<li>
+<button class="btn" onclick="myFunction('<%= titles[i] %>')"><%= titles[i] %></button> 
+<div id="myDiv" class="data" style="display: none;">
+<%- docs[i] %> <br>
+URL: <a href=<%=urls[i]%>><%= urls[i] %>/ </a>
+</div>
+</li>                     
+<% } %>
+</ul>
+    </div>
+    <script>
+        let d=parseInt('<%= titles.length %>');
+        <% for(let i=0;i<titles.length;i++) { %>
+        document.getElementById('myDiv').id = '<%= titles[i] %>';
+        <% } %>
+        function myFunction(i) {
+            var x = document.getElementById(i);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
